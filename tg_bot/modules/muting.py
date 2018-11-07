@@ -25,7 +25,7 @@ def mute(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("You'll need to either give me a username to mute, or reply to someone to be muted.")
+        message.reply_text("You'll need to either give me a username to mute,I'm not muting thin air.")
         return ""
 
     if user_id == bot.id:
@@ -36,7 +36,7 @@ def mute(bot: Bot, update: Update, args: List[str]) -> str:
 
     if member:
         if is_user_admin(chat, user_id, member=member):
-            message.reply_text("Afraid I can't stop an admin from talking!")
+            message.reply_text("You do know that he can mute your ass right?")
 
         elif member.can_send_messages is None or member.can_send_messages:
             bot.restrict_chat_member(chat.id, user_id, can_send_messages=False)
@@ -49,7 +49,7 @@ def mute(bot: Bot, update: Update, args: List[str]) -> str:
                                               mention_html(member.user.id, member.user.first_name))
 
         else:
-            message.reply_text("This user is already muted!")
+            message.reply_text("I already shut this guy up")
     else:
         message.reply_text("This user isn't in the chat!")
 
@@ -80,7 +80,7 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
         elif member.status != 'kicked' and member.status != 'left':
             if member.can_send_messages and member.can_send_media_messages \
                     and member.can_send_other_messages and member.can_add_web_page_previews:
-                message.reply_text("This user already has the right to speak.")
+                message.reply_text("I don't remember shutting this guy up")
                 return ""
             else:
                 bot.restrict_chat_member(chat.id, int(user_id),
@@ -128,7 +128,7 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
             raise
 
     if is_user_admin(chat, user_id, member):
-        message.reply_text("I really wish I could mute admins...")
+        message.reply_text("You do know that he can mute your ass...")
         return ""
 
     if user_id == bot.id:
